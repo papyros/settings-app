@@ -22,132 +22,111 @@ ApplicationWindow {
         Column {
             anchors.fill: parent
 
-            ListItem.Header {
-                text: "Personal"
-            }
+            Repeater {
+                model: settings
 
-            Flow {
-                spacing: units.dp(16)
+                delegate: Column {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
 
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.dp(24)
-                }
+                    ListItem.Header {
+                        text: title
+                    }
 
-                SettingsIcon {
-                    iconName: "image/image"
-                    name: "Appearance"
-                }
+                    Flow {
+                        spacing: units.dp(16)
 
-                SettingsIcon {
-                    iconName: "social/notifications_none"
-                    name: "Notifications"
-                }
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            margins: units.dp(24)
+                        }
 
-                SettingsIcon {
-                    iconName: "action/account_circle"
-                    name: "Online Accounts"
-                }
+                        Repeater {
+                            model: modelData.settings
 
-                SettingsIcon {
-                    iconName: "action/search"
-                    name: "Search"
-                }
-            }
-
-            ListItem.Header {
-                text: "Hardware"
-            }
-
-            Flow {
-                spacing: units.dp(16)
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.dp(24)
-                }
-
-                SettingsIcon {
-                    iconName: "device/bluetooth"
-                    name: "Bluetooth"
-                }
-
-                SettingsIcon {
-                    iconName: "hardware/desktop_windows"
-                    name: "Displays"
-                }
-
-                SettingsIcon {
-                    iconName: "hardware/keyboard"
-                    name: "Keyboard"
-                }
-
-                SettingsIcon {
-                    iconName: "hardware/mouse"
-                    name: "Mouse"
-                }
-
-                SettingsIcon {
-                    iconName: "device/network_wifi"
-                    name: "Network"
-                }
-
-                SettingsIcon {
-                    iconName: "device/battery_80"
-                    name: "Power"
-                }
-
-                SettingsIcon {
-                    iconName: "action/print"
-                    name: "Printers"
-                }
-
-                SettingsIcon {
-                    iconName: "av/volume_up"
-                    name: "Sound"
-                }
-            }
-
-            ListItem.Header {
-                text: "System"
-            }
-
-            Flow {
-                spacing: units.dp(16)
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: units.dp(24)
-                }
-
-                SettingsIcon {
-                    iconName: "device/access_time"
-                    name: "Date & Time"
-                }
-
-                SettingsIcon {
-                    iconName: "action/settings"
-                    name: "Details"
-                }
-
-                SettingsIcon {
-                    iconName: "social/share"
-                    name: "Sharing"
-                }
-
-                SettingsIcon {
-                    iconName: "action/accessibility"
-                    name: "Accessibility"
-                }
-
-                SettingsIcon {
-                    iconName: "action/account_child"
-                    name: "Users"
+                            delegate: SettingsIcon {
+                                iconName: modelData.iconName
+                                name: modelData.name
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+
+    property var settings: [
+        {
+            title: "Personal",
+            settings: [
+                {
+                    iconName: "image/image",
+                    name: "Appearance"
+                }, {
+                    iconName: "social/notifications_none",
+                    name: "Notifications"
+                }, {
+                    iconName: "action/account_circle",
+                    name: "Online Accounts"
+                }, {
+                    iconName: "action/search",
+                    name: "Search"
+                }
+            ]
+        },
+        {
+            title: "Hardware",
+            settings: [
+                {
+                    iconName: "device/bluetooth",
+                    name: "Bluetooth"
+                }, {
+                    iconName: "hardware/desktop_windows",
+                    name: "Displays"
+                }, {
+                    iconName: "hardware/keyboard",
+                    name: "Keyboard"
+                }, {
+                    iconName: "hardware/mouse",
+                    name: "Mouse"
+                }, {
+                    iconName: "device/network_wifi",
+                    name: "Network"
+                }, {
+                    iconName: "device/battery_80",
+                    name: "Power"
+                }, {
+                    iconName: "action/print",
+                    name: "Printers"
+                }, {
+                    iconName: "av/volume_up",
+                    name: "Sound"
+                }
+            ]
+        },
+        {
+            title: "System",
+            settings: [
+                {
+                    iconName: "device/access_time",
+                    name: "Date & Time"
+                }, {
+                    iconName: "action/settings",
+                    name: "Details"
+                }, {
+                    iconName: "social/share",
+                    name: "Sharing"
+                }, {
+                    iconName: "action/accessibility",
+                    name: "Accessibility"
+                }, {
+                    iconName: "action/account_child",
+                    name: "Users"
+                }
+            ]
+        }
+    ]
 }
