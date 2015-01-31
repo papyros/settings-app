@@ -50,6 +50,7 @@ ApplicationWindow {
                             delegate: SettingsIcon {
                                 iconName: modelData.iconName
                                 name: modelData.name
+                                onClicked: pageStack.push(modelData.page)
                             }
                         }
                     }
@@ -64,7 +65,8 @@ ApplicationWindow {
             settings: [
                 {
                     iconName: "image/image",
-                    name: "Appearance"
+                    name: "Appearance",
+                    page: Qt.resolvedUrl("plugins/appearance/AppearancePage.qml")
                 }, {
                     iconName: "social/notifications_none",
                     name: "Notifications"
