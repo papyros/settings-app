@@ -37,22 +37,22 @@ ApplicationWindow {
 
                 SettingsIcon {
                     iconName: "image/image"
-                    text: "Appearance"
+                    name: "Appearance"
                 }
 
                 SettingsIcon {
                     iconName: "social/notifications_none"
-                    text: "Notifications"
+                    name: "Notifications"
                 }
 
                 SettingsIcon {
                     iconName: "action/account_circle"
-                    text: "Online Accounts"
+                    name: "Online Accounts"
                 }
 
                 SettingsIcon {
                     iconName: "action/search"
-                    text: "Search"
+                    name: "Search"
                 }
             }
 
@@ -71,42 +71,42 @@ ApplicationWindow {
 
                 SettingsIcon {
                     iconName: "device/bluetooth"
-                    text: "Bluetooth"
+                    name: "Bluetooth"
                 }
 
                 SettingsIcon {
                     iconName: "hardware/desktop_windows"
-                    text: "Displays"
+                    name: "Displays"
                 }
 
                 SettingsIcon {
                     iconName: "hardware/keyboard"
-                    text: "Keyboard"
+                    name: "Keyboard"
                 }
 
                 SettingsIcon {
                     iconName: "hardware/mouse"
-                    text: "Mouse"
+                    name: "Mouse"
                 }
 
                 SettingsIcon {
                     iconName: "device/network_wifi"
-                    text: "Network"
+                    name: "Network"
                 }
 
                 SettingsIcon {
                     iconName: "device/battery_80"
-                    text: "Power"
+                    name: "Power"
                 }
 
                 SettingsIcon {
                     iconName: "action/print"
-                    text: "Printers"
+                    name: "Printers"
                 }
 
                 SettingsIcon {
                     iconName: "av/volume_up"
-                    text: "Sound"
+                    name: "Sound"
                 }
             }
 
@@ -125,27 +125,27 @@ ApplicationWindow {
 
                 SettingsIcon {
                     iconName: "device/access_time"
-                    text: "Date & Time"
+                    name: "Date & Time"
                 }
 
                 SettingsIcon {
                     iconName: "action/settings"
-                    text: "Details"
+                    name: "Details"
                 }
 
                 SettingsIcon {
                     iconName: "social/share"
-                    text: "Sharing"
+                    name: "Sharing"
                 }
 
                 SettingsIcon {
                     iconName: "action/accessibility"
-                    text: "Accessibility"
+                    name: "Accessibility"
                 }
 
                 SettingsIcon {
                     iconName: "action/account_child"
-                    text: "Users"
+                    name: "Users"
                 }
             }
         }
