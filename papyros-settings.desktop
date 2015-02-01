@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Settings
+Comment=Settings for Papyros
+Exec=papyros-settings
+Icon=preferences-system
+Terminal=False
+Type=Application
+Categories=Papyros;System
+OnlyShowIn=Papyros

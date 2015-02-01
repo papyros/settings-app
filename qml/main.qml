@@ -9,6 +9,8 @@ ApplicationWindow {
         primaryColor: "#546e7a"
     }
 
+    Component.onCompleted: visible = true
+
     initialPage: Page {
         title: "Settings"
 
