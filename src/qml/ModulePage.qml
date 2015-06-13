@@ -31,6 +31,12 @@ Page {
 
         source: module.componentUrl
         asynchronous: true
+        visible: loader.status == Loader.Ready
+    }
+
+    ProgressCircle {
+        anchors.centerIn: parent
+        visible: loader.status == Loader.Loading
     }
 
     Column {
