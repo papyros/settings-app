@@ -42,8 +42,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
              Gui
              Widgets
              Qml
-             Quick
-             LinguistTools)
+             Quick)
 
 add_subdirectory(src)
 add_subdirectory(modules)
