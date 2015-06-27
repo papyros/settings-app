@@ -1,0 +1,14 @@
+{
+    "name": "About",
+    "iconSource": "icon://action/info_outline",
+    "category": "system",
+    "keywords": [
+        "about",
+        "credits",
+        "license",
+        "info",
+        "details",
+        "system",
+        "version"
+    ]
+}
