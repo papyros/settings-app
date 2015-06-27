@@ -1,0 +1,12 @@
+{
+    "name": "Network",
+    "iconSource": "icon://device/signal_wifi_3_bar",
+    "category": "hardware",
+    "keywords": [
+        "network",
+        "wifi",
+        "ethernet",
+        "vpn",
+        "hotspot"
+    ]
+}
