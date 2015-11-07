@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Settings
+Name[pl]=Ustawienia
 Comment=Settings for Papyros
+Comment[pl]=Ustawienia Papyros
 Exec=papyros-settings
 Icon=preferences-system
 Terminal=False
