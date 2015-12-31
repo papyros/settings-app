@@ -1,0 +1,11 @@
+{
+    "name": "Display",
+    "iconSource": "icon://hardware/desktop_windows",
+    "category": "hardware",
+    "keywords": [
+        "display",
+        "resolution",
+        "screen",
+        "monitor"
+    ]
+}
