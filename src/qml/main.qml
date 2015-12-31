@@ -24,7 +24,8 @@ ApplicationWindow {
     title: "Settings"
 
     theme {
-        primaryColor: "#546e7a"
+        primaryColor: Palette.colors.blueGrey["600"]
+        primaryDarkColor: Palette.colors.blueGrey["700"]
     }
 
     Component.onCompleted: visible = true

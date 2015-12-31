@@ -44,6 +44,10 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
              Qml
              Quick)
 
+install(FILES papyros-settings.desktop
+		DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+
+
 add_subdirectory(src)
 add_subdirectory(modules)
 
