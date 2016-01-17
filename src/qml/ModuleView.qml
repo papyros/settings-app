@@ -21,29 +21,42 @@ import Material.ListItems 0.1 as ListItem
 import Papyros.Desktop 0.1
 
 Item {
-    default property alias contents: column.children
+    default property alias contents: column.data
 
     property alias showApplyButton: applyButton.visible
     property alias enableApplyButton: applyButton.enabled
 
     signal apply()
 
-    View {
-        anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
-            topMargin: Units.dp(32)
+    Flickable {
+        id: flickable
+        anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: view.height + 2 * view.anchors.topMargin
+        interactive: contentHeight > height
+
+        View {
+            id: view
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                topMargin: Units.dp(32)
+            }
+
+            width: Math.min(parent.width - 2 * anchors.topMargin, Units.dp(600))
+
+            elevation: 1
+            height: column.implicitHeight
+
+            Column {
+                id: column
+                anchors.fill: parent
+            }
         }
+    }
 
-        width: Math.min(parent.width - 2 * anchors.topMargin, Units.dp(600))
-
-        elevation: 1
-        height: column.implicitHeight
-
-        Column {
-            id: column
-            anchors.fill: parent
-        }
+    Scrollbar {
+        flickableItem: flickable
     }
 
     Button {

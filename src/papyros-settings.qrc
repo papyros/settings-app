@@ -3,5 +3,6 @@
         <file>qml/main.qml</file>
         <file>qml/ModuleContainer.qml</file>
         <file>qml/ModuleView.qml</file>
+        <file>qml/Subheader.qml</file>
     </qresource>
 </RCC>

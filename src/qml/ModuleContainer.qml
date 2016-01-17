@@ -45,13 +45,13 @@ Item {
 
         Icon {
             name: "alert/warning"
-            color: Palette.colors['red']['500']
             anchors.horizontalCenter: parent.horizontalCenter
+            size: Units.dp(48)
         }
 
         Label {
             text: "Unable to load the %1 settings".arg(module.name)
-            style: "subheading"
+            style: "dialog"
             color: Theme.light.subTextColor
             anchors.horizontalCenter: parent.horizontalCenter
         }

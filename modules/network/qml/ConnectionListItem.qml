@@ -27,6 +27,9 @@ import Papyros.Network 0.1
 ListItem.Standard {
     id: connectionItem;
 
+    showDivider: true
+    dividerInset: 0
+
     text: ItemUniqueName
     //valueText: connState[ConnectionState]
     //subText: SecurityTypeString
@@ -47,8 +50,6 @@ ListItem.Standard {
     ]
 
     onClicked: {
-        indicator.close()
-
         if (Uuid || !predictableWirelessPassword) {
             if (ConnectionState == Enums.Deactivated) {
                 if (!predictableWirelessPassword && !Uuid) {

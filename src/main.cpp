@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Module>();
     qmlRegisterType<ModuleManager>("io.papyros.settings", 0, 1, "ModuleManager");
     qmlRegisterType(QUrl("qrc:/qml/ModuleView.qml"), "io.papyros.settings", 0, 1, "ModuleView");
+    qmlRegisterType(QUrl("qrc:/qml/Subheader.qml"), "io.papyros.settings", 0, 1, "Subheader");
 
     QQmlApplicationEngine engine(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     return app.exec();

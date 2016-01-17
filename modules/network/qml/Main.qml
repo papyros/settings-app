@@ -19,84 +19,10 @@ import QtQuick 2.4
 import Material 0.2
 import Material.ListItems 0.1 as ListItem
 import Papyros.Network 0.1
+import io.papyros.settings 0.1
 
-Item {
+ModuleView {
 
-    Sidebar {
-        id: sidebar
-
-        ListItem.Standard {
-            iconName: "device/signal_wifi_3_bar"
-            text: "Wi-Fi"
-            selected: true
-        }
-    }
-
-    Item {
-        anchors {
-            left: sidebar.right
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-
-        Column {
-            id: wifiView
-
-            anchors.fill: parent
-
-            ListItem.Subtitled {
-                iconName: "device/signal_wifi_3_bar"
-                text: "Wi-Fi"
-                subText: enabledConnections.wirelessEnabled ? "Connected" : "Disabled"
-
-                onClicked: wifiSwitch.checked = ! wifiSwitch.checked
-
-                secondaryItem: Switch {
-                    id: wifiSwitch
-                    anchors.centerIn: parent
-                    checked: enabledConnections.wirelessEnabled
-                    onClicked: {
-                        handler.enableWireless(checked)
-                    }
-                }
-            }
-
-            ListItem.Subheader {
-                text: "Available Networks"
-            }
-
-            Repeater {
-                model: appletProxyModel
-                delegate: ConnectionListItem {}
-            }
-        }
-    }
-
-    ConnectionIcon {
-        id: connectionIconProvider;
-    }
-
-    NetworkStatus {
-        id: networkStatus
-    }
-
-    EnabledConnections {
-        id: enabledConnections;
-    }
-
-    NetworkModel {
-        id: connectionModel;
-    }
-
-    AppletProxyModel {
-        id: appletProxyModel;
-        sourceModel: connectionModel;
-    }
-
-    Handler {
-        id: handler;
-    }
 
     property var icons: {
         "network-wireless-100-locked": "device/signal_wifi_4_bar",
@@ -143,5 +69,59 @@ Item {
                 else
                     return "device/wifi_tethering"
         }
+    }
+
+    ListItem.Subtitled {
+        iconName: "device/signal_wifi_3_bar"
+        text: "Wi-Fi"
+        subText: enabledConnections.wirelessEnabled ? "Connected" : "Disabled"
+
+        onClicked: wifiSwitch.checked = ! wifiSwitch.checked
+
+        secondaryItem: Switch {
+            id: wifiSwitch
+            anchors.centerIn: parent
+            checked: enabledConnections.wirelessEnabled
+            onClicked: {
+                handler.enableWireless(checked)
+            }
+        }
+    }
+
+    Subheader {
+        text: "Available Networks"
+        textColor: Theme.accentColor
+        showDivider: true
+        visible: enabledConnections.wirelessEnabled
+    }
+
+    Repeater {
+        model: appletProxyModel
+        delegate: ConnectionListItem {}
+    }
+
+    ConnectionIcon {
+        id: connectionIconProvider;
+    }
+
+    NetworkStatus {
+        id: networkStatus
+    }
+
+    EnabledConnections {
+        id: enabledConnections;
+    }
+
+    NetworkModel {
+        id: connectionModel;
+    }
+
+    AppletProxyModel {
+        id: appletProxyModel;
+        sourceModel: connectionModel;
+    }
+
+    Handler {
+        id: handler;
     }
 }
