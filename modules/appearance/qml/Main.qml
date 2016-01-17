@@ -1,6 +1,6 @@
 /*
  * System Settings - Settings app for Papyros
- * Copyright (C) 2015 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2015-2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,87 +21,61 @@ import Material.ListItems 0.1 as ListItem
 import Papyros.Desktop 0.1
 
 Item {
-    Button {
-        id: button
 
+    View {
         anchors {
-            horizontalCenter: parent.horizontalCenter
+            left: parent.left
+            right: parent.right
             top: parent.top
-            bottom: column.top
-            margins: Units.dp(16)
+            margins: Units.dp(32)
         }
 
-        width: backgroundColumn.width + 2 * anchors.margins
         elevation: 1
-
-        onClicked: print(ShellSettings.desktop.backgroundUrl)
+        height: column.implicitHeight
 
         Column {
-            id: backgroundColumn
-            anchors.centerIn: parent
-            spacing: Units.dp(8)
-            height: button.height - Units.dp(24)
+            id: column
+            anchors.fill: parent
 
-            Image {
-                anchors.horizontalCenter: parent.horizontalCenter
-                source: ShellSettings.desktop.backgroundUrl
-                width: height * sourceSize.width/sourceSize.height
-                height: parent.height - parent.spacing - label.height
-
-                Component.onCompleted: print(source)
+            Subheader {
+                text: "Desktop"
+                showDivider: true
+                textColor: Theme.accentColor
             }
 
-            Label {
-                id: label
+            ListItem.Standard {
+                text: "Transparent app shelf"
+                interactive: false
+                showDivider: true
 
-                text: "Background"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
-    }
+                secondaryItem: Switch {
+                    anchors.centerIn: parent
 
-    Column {
-        id: column
-
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
-            margins: Units.dp(16)
-        }
-
-        width: Math.min(Units.dp(400), parent.width - anchors.margins * 2)
-
-        ListItem.Standard {
-            text: "Transparent app shelf"
-            interactive: false
-
-            secondaryItem: Switch {
-                anchors.centerIn: parent
-
-                checked: ShellSettings.appShelf.transparentShelf
-                onCheckedChanged: {
-                    ShellSettings.appShelf.transparentShelf = checked
-                    checked = Qt.binding(function() {
-                        return ShellSettings.appShelf.transparentShelf
-                    })
+                    checked: ShellSettings.appShelf.transparentShelf
+                    onCheckedChanged: {
+                        ShellSettings.appShelf.transparentShelf = checked
+                        checked = Qt.binding(function() {
+                            return ShellSettings.appShelf.transparentShelf
+                        })
+                    }
                 }
             }
-        }
 
-        ListItem.Standard {
-            text: "Accent color"
-            tintColor: "transparent"
+            ListItem.Standard {
+                text: "Accent color"
+                tintColor: "transparent"
 
-            onClicked: colorPicker.open()
+                onClicked: colorPicker.open()
 
-            secondaryItem: Rectangle {
-                anchors.centerIn: parent
+                secondaryItem: Rectangle {
+                    anchors.centerIn: parent
 
-                radius: Units.dp(2)
-                width: Units.dp(24)
-                height: width
-                color: Palette.colors[ShellSettings.desktop.accentColor]['500']
-                border.color: Palette.colors[ShellSettings.desktop.accentColor]['700']
+                    radius: Units.dp(2)
+                    width: Units.dp(24)
+                    height: width
+                    color: Palette.colors[ShellSettings.desktop.accentColor]['500']
+                    border.color: Palette.colors[ShellSettings.desktop.accentColor]['700']
+                }
             }
         }
     }
