@@ -21,39 +21,41 @@ import Material.ListItems 0.1 as ListItem
 import Papyros.Desktop 0.1
 
 Item {
-    Column {
-        id: column
-
+    View {
         anchors {
-            horizontalCenter: parent.horizontalCenter
+            left: parent.left
+            right: parent.right
             top: parent.top
-            margins: Units.dp(16)
+            margins: Units.dp(32)
         }
 
-        width: Math.min(Units.dp(400), parent.width - anchors.margins * 2)
+        elevation: 1
+        height: column.implicitHeight
 
-        ListItem.Subtitled {
-            text: "Display scale"
-            valueText: scaleSlider.valueInfo(scaleSlider.value)
-            interactive: false
+        Column {
+            id: column
+            anchors.fill: parent
 
-            content: Slider {
-                id: scaleSlider
+            ListItem.Subtitled {
+                text: "Display scale"
+                valueText: scaleSlider.knobLabel
+                interactive: false
 
-                width: parent.width
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: Units.dp(7)
+                content: Slider {
+                    id: scaleSlider
 
-                minimumValue: 0.1
-                maximumValue: 5
-                numericValueLabel: true
-                stepSize: 0.1
+                    width: parent.width
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: Units.dp(-12)
 
-                function valueInfo(v) {
-                    return (v * 100).toFixed(0) + "%"
+                    minimumValue: 0.1
+                    maximumValue: 5
+                    numericValueLabel: true
+                    stepSize: 0.1
+
+                    knobLabel: (value * 100).toFixed(0) + "%"
+                    value: ShellSettings.display.multiplier
                 }
-
-                value: ShellSettings.display.multiplier
             }
         }
     }
@@ -61,7 +63,7 @@ Item {
 
     Button {
         anchors {
-            margins: Units.dp(16)
+            margins: Units.dp(32)
             bottom: parent.bottom
             right: parent.right
         }
