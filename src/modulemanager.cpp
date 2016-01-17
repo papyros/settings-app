@@ -89,3 +89,15 @@ void ModuleManager::setFilter(const QString &filter)
         filterChanged();
     }
 }
+
+Module *ModuleManager::getModule(QString id) const
+{
+    QList<Module *> modules = m_modules;
+
+    foreach (Module *module, modules) {
+        if (module->id() == id)
+            return module;
+    }
+
+    return nullptr;
+}

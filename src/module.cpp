@@ -17,10 +17,13 @@
  */
 
 #include "module.h"
+
+#include <QFileInfo>
 #include <QJsonDocument>
 
 Module::Module(const QString &path, QObject *parent) : QObject(parent)
 {
+    m_id = QFileInfo(path).fileName();
     m_path = path;
 
     QFile metadataFile(path + "/metadata.json");
@@ -48,4 +51,29 @@ Module::Category Module::category() const
 QUrl Module::componentUrl() const
 {
     return QUrl("file://" + m_path + "/Main.qml");
+}
+
+QString Module::id() const
+{
+    return m_id;
+}
+
+QString Module::name() const
+{
+    return json["name"].toString();
+}
+
+QUrl Module::iconSource() const
+{
+    return json["iconSource"].toVariant().toUrl();
+}
+
+QString Module::categoryName() const
+{
+    return json["category"].toString();
+}
+
+QStringList Module::keywords() const
+{
+    return json["keywords"].toVariant().toStringList();
 }

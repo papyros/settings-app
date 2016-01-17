@@ -29,6 +29,7 @@ class Module : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString id READ id CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QUrl iconSource READ iconSource CONSTANT)
     Q_PROPERTY(Category category READ category CONSTANT)
@@ -39,24 +40,21 @@ class Module : public QObject
     Q_ENUMS(Category)
 
 public:
-    enum Category {
-        UnknownCategory,
-        PersonalCategory,
-        HardwareCategory,
-        SystemCategory
-    };
+    enum Category { UnknownCategory, PersonalCategory, HardwareCategory, SystemCategory };
 
     Module(const QString &path, QObject *parent = 0);
 
-    QString name() const { return json["name"].toString(); }
-    QUrl iconSource() const { return json["iconSource"].toVariant().toUrl(); }
+    QString id() const;
+    QString name() const;
+    QUrl iconSource() const;
     Category category() const;
-    QString categoryName() const { return json["category"].toString(); }
-    QStringList keywords() const { return json["keywords"].toVariant().toStringList(); }
+    QString categoryName() const;
+    QStringList keywords() const;
     QUrl componentUrl() const;
 
 private:
     QJsonObject json;
+    QString m_id;
     QString m_path;
 };
 

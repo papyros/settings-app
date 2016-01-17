@@ -20,6 +20,7 @@
 #include <QtQml>
 #include <QtCore/QStandardPaths>
 #include <QDebug>
+#include <Papyros/KQuickConfig>
 
 #include "modulemanager.h"
 
@@ -36,6 +37,9 @@ int main(int argc, char *argv[])
 
     // Set the X11 WML_CLASS so X11 desktops can find the desktop file
     qputenv("RESOURCE_NAME", "io.papyros.Settings");
+
+    // TODO: Remove after we add a QML module directly to Papyros.Core
+    qmlRegisterType<KQuickConfig>("Papyros.Core", 0, 1, "KQuickConfig");
 
     qmlRegisterType<Module>();
     qmlRegisterType<ModuleManager>("io.papyros.settings", 0, 1, "ModuleManager");

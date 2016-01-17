@@ -53,6 +53,8 @@ public:
         return m_modules.getModel();
     }
 
+    Q_INVOKABLE Module *getModule(QString id) const;
+
 public slots:
     void setFilter(const QString &filter);
 

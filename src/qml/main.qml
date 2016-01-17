@@ -19,6 +19,7 @@ import QtQuick 2.4
 import Material 0.2
 import Material.ListItems 0.1 as ListItem
 import io.papyros.settings 0.1
+import Papyros.Core 0.1
 
 ApplicationWindow {
     title: "Settings"
@@ -74,11 +75,29 @@ ApplicationWindow {
                 bottom: parent.bottom
             }
 
-            module: moduleRepeater.count > 0 ? moduleManager.modules.get(0) : undefined
+            module: moduleRepeater.count > 0
+                    ? session.selectedModule ? moduleManager.getModule(session.selectedModule)
+                                             :  moduleManager.modules.get(0)
+                    : undefined
+
+            onModuleChanged: {
+                if (module)
+                    session.selectedModule = module.id
+            }
         }
     }
 
     ModuleManager {
         id: moduleManager
+    }
+
+    KQuickConfig {
+        id: session
+
+        file: "papyros-settings"
+        group: "session"
+        defaults: {
+            "selectedModule": ""
+        }
     }
 }
