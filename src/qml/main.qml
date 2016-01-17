@@ -51,9 +51,52 @@ ApplicationWindow {
                     right: parent.right
                 }
 
+                Subheader {
+                    text: "Personal"
+                    textColor: Theme.accentColor
+                }
+
                 Repeater {
-                    id: moduleRepeater
-                    model: moduleManager.modules
+                    id: personalRepeater
+                    model: moduleManager.personalModules
+
+                    delegate: ListItem.Standard {
+                        iconSource: edit.iconSource
+                        text: edit.name
+                        selected: moduleContainer.module == edit
+                        onClicked: moduleContainer.module = edit
+                        showDivider: index == personalRepeater.count - 1
+                        dividerInset: 0
+                    }
+                }
+
+                Subheader {
+                    text: "Hardware"
+                    textColor: Theme.accentColor
+                }
+
+                Repeater {
+                    id: hardwareRepeater
+                    model: moduleManager.hardwareModules
+
+                    delegate: ListItem.Standard {
+                        iconSource: edit.iconSource
+                        text: edit.name
+                        selected: moduleContainer.module == edit
+                        onClicked: moduleContainer.module = edit
+                        showDivider: index == hardwareRepeater.count - 1
+                        dividerInset: 0
+                    }
+                }
+
+                Subheader {
+                    text: "System"
+                    textColor: Theme.accentColor
+                }
+
+                Repeater {
+                    id: systemRepeater
+                    model: moduleManager.systemModules
 
                     delegate: ListItem.Standard {
                         iconSource: edit.iconSource
@@ -75,9 +118,9 @@ ApplicationWindow {
                 bottom: parent.bottom
             }
 
-            module: moduleRepeater.count > 0
+            module: personalRepeater.count > 0
                     ? session.selectedModule ? moduleManager.getModule(session.selectedModule)
-                                             :  moduleManager.modules.get(0)
+                                             :  moduleManager.personaModules.get(0)
                     : undefined
 
             onModuleChanged: {

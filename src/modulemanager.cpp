@@ -52,6 +52,9 @@ void ModuleManager::componentComplete()
 void ModuleManager::reloadModules()
 {
     m_modules.clear();
+    m_personalModules.clear();
+    m_hardwareModules.clear();
+    m_systemModules.clear();
 
     Q_FOREACH (const QString &path, modulePaths()) {
         qDebug() << "Searching for modules in" << path;
@@ -69,14 +72,27 @@ void ModuleManager::reloadModules()
                 Module *module = new Module(dir.absoluteFilePath(moduleName), this);
 
                 m_modules << module;
+
+                switch (module->category()) {
+                case Module::PersonalCategory:
+                    m_personalModules << module;
+                    break;
+                case Module::HardwareCategory:
+                    m_hardwareModules << module;
+                    break;
+                case Module::SystemCategory:
+                    m_systemModules << module;
+                    break;
+                default:
+                    qWarning() << "Module has an unkown category:" << module->categoryName();
+                    break;
+                }
             }
             else {
                 qWarning() << "Module doesn't have a metadata file:" << moduleName;
             }
         }
     }
-
-    emit modulesChanged();
 }
 
 void ModuleManager::setFilter(const QString &filter)

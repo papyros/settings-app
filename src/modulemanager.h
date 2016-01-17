@@ -33,7 +33,9 @@ class ModuleManager : public QObject, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
 
     Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
-    Q_PROPERTY(QObjectListModel *modules READ modules CONSTANT)
+    Q_PROPERTY(QObjectListModel *personalModules READ personalModules CONSTANT)
+    Q_PROPERTY(QObjectListModel *hardwareModules READ hardwareModules CONSTANT)
+    Q_PROPERTY(QObjectListModel *systemModules READ systemModules CONSTANT)
 
 public:
     ModuleManager(QObject *parent = 0);
@@ -48,9 +50,19 @@ public:
         return m_filter;
     }
 
-    QObjectListModel *modules()
+    QObjectListModel *personalModules()
     {
-        return m_modules.getModel();
+        return m_personalModules.getModel();
+    }
+
+    QObjectListModel *hardwareModules()
+    {
+        return m_hardwareModules.getModel();
+    }
+
+    QObjectListModel *systemModules()
+    {
+        return m_systemModules.getModel();
     }
 
     Q_INVOKABLE Module *getModule(QString id) const;
@@ -58,10 +70,10 @@ public:
 public slots:
     void setFilter(const QString &filter);
 
-    Q_SIGNALS : void filterChanged();
-    void modulesChanged();
+signals:
+    void filterChanged();
 
-private Q_SLOTS:
+private slots:
     void reloadModules();
 
 private:
@@ -70,6 +82,9 @@ private:
     QFileSystemWatcher *m_dirWatcher;
     QString m_filter;
     QQuickList<Module> m_modules;
+    QQuickList<Module> m_personalModules;
+    QQuickList<Module> m_hardwareModules;
+    QQuickList<Module> m_systemModules;
 };
 
 #endif // MODULEMANAGER_H
