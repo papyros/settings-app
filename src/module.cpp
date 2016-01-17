@@ -19,8 +19,7 @@
 #include "module.h"
 #include <QJsonDocument>
 
-Module::Module(const QString &path, QObject *parent)
-        : QObject(parent)
+Module::Module(const QString &path, QObject *parent) : QObject(parent)
 {
     m_path = path;
 
@@ -48,5 +47,5 @@ Module::Category Module::category() const
 
 QUrl Module::componentUrl() const
 {
-    return QUrl(m_path + "/Main.qml");
+    return QUrl("file://" + m_path + "/Main.qml");
 }

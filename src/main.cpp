@@ -30,17 +30,16 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("papyros.io");
     app.setOrganizationName("Papyros");
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    app.setDesktopFileName("io.papyros.Settings.desktop");
+#endif
+
+    // Set the X11 WML_CLASS so X11 desktops can find the desktop file
+    qputenv("RESOURCE_NAME", "io.papyros.Settings");
+
     qmlRegisterType<Module>();
     qmlRegisterType<ModuleManager>("io.papyros.settings", 0, 1, "ModuleManager");
 
-    QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-            QStringLiteral("papyros-settings/app/main.qml"));
-
-    if (fileName.isEmpty()) {
-        qWarning() << "Failed to find the main QML file, aborting.";
-        return 1;
-    }
-
-    QQmlApplicationEngine engine(fileName);
+    QQmlApplicationEngine engine(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     return app.exec();
 }

@@ -74,7 +74,7 @@ ApplicationWindow {
                 bottom: parent.bottom
             }
 
-            module: moduleRepeater.count > 0 ? moduleManager.modules.get(0) : null
+            module: moduleRepeater.count > 0 ? moduleManager.modules.get(0) : undefined
         }
     }
 

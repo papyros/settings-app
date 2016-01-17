@@ -1,29 +1,25 @@
-project(io.papyros.settings)
+project(io.papyros.Settings CXX)
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-# Instruct CMake to run moc automatically when needed
+# Instruct CMake to run moc and rrc automatically when needed
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
-# ECM
+# Extra CMake files
 find_package(ECM 0.0.11 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-# Installation directories
 include(KDEInstallDirs)
-
-# Other macros
 include(KDECMakeSettings)
 include(KDECompilerSettings)
+include(FeatureSummary)
 
 # Include our macros
 include(PapyrosSettings)
-
-# Macro to print feature summary
-include(FeatureSummary)
 
 # Build flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -Wno-unused-parameter -pedantic -std=c++11")
@@ -39,19 +35,19 @@ set(QT_MIN_VERSION "5.4.0")
 # Find Qt5
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
              Core
-             Gui
-             Widgets
              Qml
              Quick)
 
 find_package(Papyros)
 
-install(FILES papyros-settings.desktop
-		DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
-
+# Install the desktop and appdata files
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/${PROJECT_NAME}.desktop
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/${PROJECT_NAME}.appdata.xml
+        DESTINATION ${CMAKE_INSTALL_METAINFODIR})
 
 add_subdirectory(src)
 add_subdirectory(modules)
 
-# Display featute summary
+# Display feature summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
