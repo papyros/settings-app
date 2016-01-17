@@ -1,0 +1,10 @@
+{
+    "name": "Sound",
+    "iconSource": "icon://av/volume_up",
+    "category": "hardware",
+    "keywords": [
+        "sound",
+        "volume",
+        "music"
+    ]
+}
