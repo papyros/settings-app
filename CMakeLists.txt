@@ -44,6 +44,8 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
              Qml
              Quick)
 
+find_package(Papyros)
+
 install(FILES papyros-settings.desktop
 		DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 

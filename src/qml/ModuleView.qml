@@ -18,36 +18,41 @@
 import QtQuick 2.2
 import Material 0.1
 
-Button {
-    id: item
+Item {
+    id: moduleView
 
     property var module
 
-    width: Units.dp(100)
-    height: Units.dp(80)
+    Loader {
+        id: loader
+        anchors.fill: parent
 
-    onClicked: {
-        pageStack.push(Qt.resolvedUrl("ModulePage.qml"), {module: module})
+        source: module ? module.componentUrl : undefined
+        asynchronous: true
+        visible: loader.status == Loader.Ready
+    }
+
+    ProgressCircle {
+        anchors.centerIn: parent
+        visible: loader.status == Loader.Loading
     }
 
     Column {
-        id: column
         anchors.centerIn: parent
+        visible: loader.status == Loader.Error
+
         spacing: Units.dp(8)
 
         Icon {
-            id: icon
-
+            name: "alert/warning"
+            color: Palette.colors['red']['500']
             anchors.horizontalCenter: parent.horizontalCenter
-            size: Units.dp(40)
-            color: Theme.accentColor
-            source: module.iconSource
         }
 
         Label {
-            id: label
-
-            text: module.name
+            text: "Unable to load the %1 settings".arg(module.name)
+            style: "subheading"
+            color: Theme.light.subTextColor
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }

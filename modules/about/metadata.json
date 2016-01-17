@@ -1,6 +1,6 @@
 {
     "name": "About",
-    "iconSource": "icon://action/info_outline",
+    "iconSource": "icon://action/info",
     "category": "system",
     "keywords": [
         "about",

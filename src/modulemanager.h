@@ -19,9 +19,11 @@
 #define MODULEMANAGER_H
 
 #include <QObject>
+
 #include <QQmlListProperty>
 #include <QQmlParserStatus>
 #include <QFileSystemWatcher>
+#include <Papyros/QQuickList>
 
 #include "module.h"
 
@@ -31,9 +33,7 @@ class ModuleManager : public QObject, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
 
     Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
-    Q_PROPERTY(QQmlListProperty<Module> personalModules READ personalModules NOTIFY modulesChanged)
-    Q_PROPERTY(QQmlListProperty<Module> hardwareModules READ hardwareModules NOTIFY modulesChanged)
-    Q_PROPERTY(QQmlListProperty<Module> systemModules READ systemModules NOTIFY modulesChanged)
+    Q_PROPERTY(QObjectListModel *modules READ modules CONSTANT)
 
 public:
     ModuleManager(QObject *parent = 0);
@@ -43,31 +43,31 @@ public:
     void classBegin();
     void componentComplete();
 
-    QString filter() const { return m_filter; }
+    QString filter() const
+    {
+        return m_filter;
+    }
 
-    QQmlListProperty<Module> personalModules();
-    QQmlListProperty<Module> hardwareModules();
-    QQmlListProperty<Module> systemModules();
+    QObjectListModel *modules()
+    {
+        return m_modules.getModel();
+    }
 
 public slots:
     void setFilter(const QString &filter);
 
-Q_SIGNALS:
-    void filterChanged();
+    Q_SIGNALS : void filterChanged();
     void modulesChanged();
 
 private Q_SLOTS:
     void reloadModules();
 
 private:
-    QQmlListProperty<Module> qmlList(QList<Module *> &list);
     QStringList modulePaths();
 
     QFileSystemWatcher *m_dirWatcher;
     QString m_filter;
-    QList<Module *> m_personalModules;
-    QList<Module *> m_hardwareModules;
-    QList<Module *> m_systemModules;
+    QQuickList<Module> m_modules;
 };
 
 #endif // MODULEMANAGER_H

@@ -40,23 +40,41 @@ ApplicationWindow {
             }
         ]
 
-        Column {
-            anchors.fill: parent
+        Sidebar {
+            id: sidebar
+            mode: 'left'
 
-            CategoryView {
-                name: "Personal"
-                modules: moduleManager.personalModules
+            Column {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                Repeater {
+                    id: moduleRepeater
+                    model: moduleManager.modules
+
+                    delegate: ListItem.Standard {
+                        iconSource: edit.iconSource
+                        text: edit.name
+                        selected: moduleView.module == edit
+                        onClicked: moduleView.module = edit
+                    }
+                }
+            }
+        }
+
+        ModuleView {
+            id: moduleView
+
+            anchors {
+                left: sidebar.right
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
             }
 
-            CategoryView {
-                name: "Hardware"
-                modules: moduleManager.hardwareModules
-            }
-
-            CategoryView {
-                name: "System"
-                modules: moduleManager.systemModules
-            }
+            module: moduleRepeater.count > 0 ? moduleManager.modules.get(0) : null
         }
     }
 

@@ -27,7 +27,7 @@ ModuleManager::ModuleManager(QObject *parent) : QObject(parent)
 {
     m_dirWatcher = new QFileSystemWatcher(modulePaths(), this);
 
-    connect(m_dirWatcher, &QFileSystemWatcher::directoryChanged, this, [this](const QString& path) {
+    connect(m_dirWatcher, &QFileSystemWatcher::directoryChanged, this, [this](const QString &path) {
         qDebug() << "Modules path modified:" << path;
         reloadModules();
     });
@@ -36,7 +36,7 @@ ModuleManager::ModuleManager(QObject *parent) : QObject(parent)
 QStringList ModuleManager::modulePaths()
 {
     return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
-            "papyros-settings/modules", QStandardPaths::LocateDirectory);
+                                     "papyros-settings/modules", QStandardPaths::LocateDirectory);
 }
 
 void ModuleManager::classBegin()
@@ -49,41 +49,10 @@ void ModuleManager::componentComplete()
     reloadModules();
 }
 
-QQmlListProperty<Module> ModuleManager::personalModules()
-{
-    auto countFunc = [](QQmlListProperty<Module> *prop) {
-        return static_cast<ModuleManager *>(prop->object)->m_personalModules.count();
-    };
-    auto atFunc = [](QQmlListProperty<Module> *prop, int index) {
-        return static_cast<ModuleManager *>(prop->object)->m_personalModules.at(index);
-    };
-    return QQmlListProperty<Module>(this, 0, countFunc, atFunc);
-}
-
-QQmlListProperty<Module> ModuleManager::hardwareModules()
-{
-    auto countFunc = [](QQmlListProperty<Module> *prop) {
-        return static_cast<ModuleManager *>(prop->object)->m_hardwareModules.count();
-    };
-    auto atFunc = [](QQmlListProperty<Module> *prop, int index) {
-        return static_cast<ModuleManager *>(prop->object)->m_hardwareModules.at(index);
-    };
-    return QQmlListProperty<Module>(this, 0, countFunc, atFunc);
-}
-
-QQmlListProperty<Module> ModuleManager::systemModules()
-{
-    auto countFunc = [](QQmlListProperty<Module> *prop) {
-        return static_cast<ModuleManager *>(prop->object)->m_systemModules.count();
-    };
-    auto atFunc = [](QQmlListProperty<Module> *prop, int index) {
-        return static_cast<ModuleManager *>(prop->object)->m_systemModules.at(index);
-    };
-    return QQmlListProperty<Module>(this, 0, countFunc, atFunc);
-}
-
 void ModuleManager::reloadModules()
 {
+    m_modules.clear();
+
     Q_FOREACH (const QString &path, modulePaths()) {
         qDebug() << "Searching for modules in" << path;
         QDir dir(path);
@@ -99,34 +68,18 @@ void ModuleManager::reloadModules()
                 qDebug() << "Found module!";
                 Module *module = new Module(dir.absoluteFilePath(moduleName), this);
 
-                switch (module->category()) {
-                    case Module::PersonalCategory:
-                        m_personalModules.append(module);
-                        break;
-                    case Module::HardwareCategory:
-                        m_hardwareModules.append(module);
-                        break;
-                    case Module::SystemCategory:
-                        m_systemModules.append(module);
-                        break;
-                    default:
-                        qWarning() << "Module has an unkown category:" << module->categoryName();
-                        break;
-                }
-            } else {
+                m_modules << module;
+            }
+            else {
                 qWarning() << "Module doesn't have a metadata file:" << moduleName;
             }
         }
     }
 
-    qDebug() << m_personalModules.size() << "personal modules";
-    qDebug() << m_hardwareModules.size() << "hardware modules";
-    qDebug() << m_systemModules.size() << "system modules";
-
     emit modulesChanged();
 }
 
-void ModuleManager::setFilter(const QString& filter)
+void ModuleManager::setFilter(const QString &filter)
 {
     if (filter != m_filter) {
         m_filter = filter;
