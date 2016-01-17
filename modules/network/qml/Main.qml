@@ -96,8 +96,11 @@ ModuleView {
     }
 
     Repeater {
+        id: repeater
         model: appletProxyModel
-        delegate: ConnectionListItem {}
+        delegate: ConnectionListItem {
+            showDivider: index < repeater.count - 1
+        }
     }
 
     ConnectionIcon {

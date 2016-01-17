@@ -25,14 +25,12 @@ ModuleView {
 
     Subheader {
         text: "Desktop"
-        showDivider: true
         textColor: Theme.accentColor
     }
 
     ListItem.Standard {
         text: "Transparent app shelf"
         interactive: false
-        showDivider: true
 
         secondaryItem: Switch {
             anchors.centerIn: parent
@@ -50,6 +48,7 @@ ModuleView {
     ListItem.Standard {
         text: "Accent color"
         tintColor: "transparent"
+        showDivider: true
 
         onClicked: colorPicker.open()
 
@@ -62,6 +61,29 @@ ModuleView {
             color: Palette.colors[ShellSettings.desktop.accentColor]['500']
             border.color: Palette.colors[ShellSettings.desktop.accentColor]['700']
         }
+    }
+
+    Subheader {
+        text: "Lockscreen"
+        textColor: Theme.accentColor
+    }
+
+    ListItem.Standard {
+        text: "Nothing here yet"
+        showDivider: true
+        itemLabel.opacity: 0.5
+        interactive: false
+    }
+
+    Subheader {
+        text: "Screen saver"
+        textColor: Theme.accentColor
+    }
+
+    ListItem.Standard {
+        text: "Nothing here yet"
+        itemLabel.opacity: 0.5
+        interactive: false
     }
 
     Dialog {

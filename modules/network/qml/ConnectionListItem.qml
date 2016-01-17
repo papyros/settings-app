@@ -27,8 +27,7 @@ import Papyros.Network 0.1
 ListItem.Standard {
     id: connectionItem;
 
-    showDivider: true
-    dividerInset: 0
+    dividerInset: Units.dp(72)
 
     text: ItemUniqueName
     //valueText: connState[ConnectionState]

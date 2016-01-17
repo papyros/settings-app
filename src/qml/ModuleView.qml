@@ -43,6 +43,7 @@ Item {
                 topMargin: Units.dp(32)
             }
 
+            radius: Units.dp(1)
             width: Math.min(parent.width - 2 * anchors.topMargin, Units.dp(600))
 
             elevation: 1
