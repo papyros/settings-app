@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-import QtQuick 2.2
-import Material 0.1
+import QtQuick 2.4
+import Material 0.2
 import Material.ListItems 0.1 as ListItem
 import Papyros.Desktop 0.1
 

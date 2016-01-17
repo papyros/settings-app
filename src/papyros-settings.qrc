@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
+        <file>qml/ModuleContainer.qml</file>
         <file>qml/ModuleView.qml</file>
     </qresource>
 </RCC>

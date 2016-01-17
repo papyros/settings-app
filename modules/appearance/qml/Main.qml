@@ -15,68 +15,52 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-import QtQuick 2.2
-import Material 0.1
+import QtQuick 2.4
+import Material 0.2
 import Material.ListItems 0.1 as ListItem
 import Papyros.Desktop 0.1
+import io.papyros.settings 0.1
 
-Item {
+ModuleView {
 
-    View {
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            margins: Units.dp(32)
+    Subheader {
+        text: "Desktop"
+        showDivider: true
+        textColor: Theme.accentColor
+    }
+
+    ListItem.Standard {
+        text: "Transparent app shelf"
+        interactive: false
+        showDivider: true
+
+        secondaryItem: Switch {
+            anchors.centerIn: parent
+
+            checked: ShellSettings.appShelf.transparentShelf
+            onCheckedChanged: {
+                ShellSettings.appShelf.transparentShelf = checked
+                checked = Qt.binding(function() {
+                    return ShellSettings.appShelf.transparentShelf
+                })
+            }
         }
+    }
 
-        elevation: 1
-        height: column.implicitHeight
+    ListItem.Standard {
+        text: "Accent color"
+        tintColor: "transparent"
 
-        Column {
-            id: column
-            anchors.fill: parent
+        onClicked: colorPicker.open()
 
-            Subheader {
-                text: "Desktop"
-                showDivider: true
-                textColor: Theme.accentColor
-            }
+        secondaryItem: Rectangle {
+            anchors.centerIn: parent
 
-            ListItem.Standard {
-                text: "Transparent app shelf"
-                interactive: false
-                showDivider: true
-
-                secondaryItem: Switch {
-                    anchors.centerIn: parent
-
-                    checked: ShellSettings.appShelf.transparentShelf
-                    onCheckedChanged: {
-                        ShellSettings.appShelf.transparentShelf = checked
-                        checked = Qt.binding(function() {
-                            return ShellSettings.appShelf.transparentShelf
-                        })
-                    }
-                }
-            }
-
-            ListItem.Standard {
-                text: "Accent color"
-                tintColor: "transparent"
-
-                onClicked: colorPicker.open()
-
-                secondaryItem: Rectangle {
-                    anchors.centerIn: parent
-
-                    radius: Units.dp(2)
-                    width: Units.dp(24)
-                    height: width
-                    color: Palette.colors[ShellSettings.desktop.accentColor]['500']
-                    border.color: Palette.colors[ShellSettings.desktop.accentColor]['700']
-                }
-            }
+            radius: Units.dp(2)
+            width: Units.dp(24)
+            height: width
+            color: Palette.colors[ShellSettings.desktop.accentColor]['500']
+            border.color: Palette.colors[ShellSettings.desktop.accentColor]['700']
         }
     }
 
