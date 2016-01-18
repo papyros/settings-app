@@ -67,6 +67,7 @@ ApplicationWindow {
                         onClicked: moduleContainer.module = edit
                         showDivider: index == personalRepeater.count - 1
                         dividerInset: 0
+                        visible: developerSettings.developerMode == "true" || !edit.developerOnly
                     }
                 }
 
@@ -86,6 +87,7 @@ ApplicationWindow {
                         onClicked: moduleContainer.module = edit
                         showDivider: index == hardwareRepeater.count - 1
                         dividerInset: 0
+                        visible: developerSettings.developerMode == "true" || !edit.developerOnly
                     }
                 }
 
@@ -103,6 +105,7 @@ ApplicationWindow {
                         text: edit.name
                         selected: moduleContainer.module == edit
                         onClicked: moduleContainer.module = edit
+                        visible: developerSettings.developerMode == "true" || !edit.developerOnly
                     }
                 }
             }
@@ -141,6 +144,16 @@ ApplicationWindow {
         group: "session"
         defaults: {
             "selectedModule": ""
+        }
+    }
+
+    KQuickConfig {
+        id: developerSettings
+
+        file: "papyros"
+        group: "developer"
+        defaults: {
+            "developerMode": "false"
         }
     }
 }

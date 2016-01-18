@@ -30,9 +30,11 @@ ModuleView {
 
     ListItem.Standard {
         text: "Transparent app shelf"
-        interactive: false
+
+        onClicked: appShelfSwitch.checked = !appShelfSwitch.checked
 
         secondaryItem: Switch {
+            id: appShelfSwitch
             anchors.centerIn: parent
 
             checked: ShellSettings.appShelf.transparentShelf

@@ -87,3 +87,13 @@ int Module::priority() const
         return 1;
     }
 }
+
+bool Module::developerOnly() const
+{
+    if (json.contains("developerOnly")) {
+        return json["developerOnly"].toVariant().toBool();
+    }
+    else {
+        return false;
+    }
+}

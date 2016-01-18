@@ -21,6 +21,10 @@ import Material.ListItems 0.1 as ListItem
 import Papyros.Desktop 0.1
 
 Item {
+    property int developerClickCount: 0
+    readonly property int developerTotalClicks: 7
+    readonly property int developerClickRemaining: developerTotalClicks - developerClickCount
+
     Column {
         id: column
         anchors.centerIn: parent
@@ -33,6 +37,26 @@ Item {
             height: width
 
             source: Qt.resolvedUrl("papyros-icon.png")
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (developerSettings.developerMode == "true")
+                        return
+
+                    developerClickCount++
+
+                    print(developerClickCount, developerClickRemaining)
+
+                    if (developerClickRemaining == 0) {
+                        snackbar.open("You are now a developer!")
+                        developerSettings.developerMode = "true"
+                    } else if (developerClickRemaining <= 3) {
+                        snackbar.open(("You are now %1 steps from becoming a " +
+                                      "developer").arg(developerClickRemaining))
+                    }
+                }
+            }
         }
 
         Row {
@@ -85,5 +109,9 @@ Item {
                 textColor: Palette.colors["green"]["400"]
             }
         }
+    }
+
+    Snackbar {
+        id: snackbar
     }
 }

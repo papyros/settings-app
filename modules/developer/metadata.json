@@ -1,0 +1,16 @@
+{
+    "name": "Developer",
+    "iconSource": "icon://device/developer_mode",
+    "category": "system",
+    "keywords": [
+        "developer",
+        "mode",
+        "advanced",
+        "tweak",
+        "tools",
+        "terminal",
+        "pro"
+    ],
+    "priority": 0,
+    "developerOnly": true
+}
