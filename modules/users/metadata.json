@@ -1,0 +1,16 @@
+{
+    "name": "Users",
+    "iconSource": "icon://social/people",
+    "category": "system",
+    "keywords": [
+        "users",
+        "user",
+        "admin",
+        "guest",
+        "people",
+        "person",
+        "create",
+        "delete",
+        "password"
+    ]
+}
