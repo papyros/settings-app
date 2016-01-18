@@ -36,6 +36,7 @@ class Module : public QObject
     Q_PROPERTY(QString categoryName READ categoryName CONSTANT)
     Q_PROPERTY(QStringList keywords READ keywords CONSTANT)
     Q_PROPERTY(QUrl componentUrl READ componentUrl CONSTANT)
+    Q_PROPERTY(int priority READ priority CONSTANT)
 
     Q_ENUMS(Category)
 
@@ -51,6 +52,7 @@ public:
     QString categoryName() const;
     QStringList keywords() const;
     QUrl componentUrl() const;
+    int priority() const;
 
 private:
     QJsonObject json;

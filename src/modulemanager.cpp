@@ -23,6 +23,11 @@
 #include <QDir>
 #include <QFile>
 
+bool higherPriorityFirst(const Module *module1, const Module *module2)
+{
+    return module1->priority() > module2->priority();
+}
+
 ModuleManager::ModuleManager(QObject *parent) : QObject(parent)
 {
     m_dirWatcher = new QFileSystemWatcher(modulePaths(), this);
@@ -52,9 +57,10 @@ void ModuleManager::componentComplete()
 void ModuleManager::reloadModules()
 {
     m_modules.clear();
-    m_personalModules.clear();
-    m_hardwareModules.clear();
-    m_systemModules.clear();
+
+    QList<Module *> personalModules;
+    QList<Module *> hardwareModules;
+    QList<Module *> systemModules;
 
     Q_FOREACH (const QString &path, modulePaths()) {
         qDebug() << "Searching for modules in" << path;
@@ -75,13 +81,13 @@ void ModuleManager::reloadModules()
 
                 switch (module->category()) {
                 case Module::PersonalCategory:
-                    m_personalModules << module;
+                    personalModules << module;
                     break;
                 case Module::HardwareCategory:
-                    m_hardwareModules << module;
+                    hardwareModules << module;
                     break;
                 case Module::SystemCategory:
-                    m_systemModules << module;
+                    systemModules << module;
                     break;
                 default:
                     qWarning() << "Module has an unkown category:" << module->categoryName();
@@ -93,6 +99,14 @@ void ModuleManager::reloadModules()
             }
         }
     }
+
+    std::sort(personalModules.begin(), personalModules.end(), higherPriorityFirst);
+    std::sort(hardwareModules.begin(), hardwareModules.end(), higherPriorityFirst);
+    std::sort(systemModules.begin(), systemModules.end(), higherPriorityFirst);
+
+    m_personalModules = personalModules;
+    m_hardwareModules = hardwareModules;
+    m_systemModules = systemModules;
 }
 
 void ModuleManager::setFilter(const QString &filter)

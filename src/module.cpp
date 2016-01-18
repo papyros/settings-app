@@ -77,3 +77,13 @@ QStringList Module::keywords() const
 {
     return json["keywords"].toVariant().toStringList();
 }
+
+int Module::priority() const
+{
+    if (json.contains("priority")) {
+        return json["priority"].toVariant().toInt();
+    }
+    else {
+        return 1;
+    }
+}

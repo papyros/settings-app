@@ -120,7 +120,7 @@ ApplicationWindow {
 
             module: personalRepeater.count > 0
                     ? session.selectedModule ? moduleManager.getModule(session.selectedModule)
-                                             :  moduleManager.personaModules.get(0)
+                                             :  moduleManager.personalModules.get(0)
                     : undefined
 
             onModuleChanged: {
