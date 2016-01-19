@@ -23,7 +23,7 @@ import io.papyros.settings 0.1
 
 ModuleView {
 
-    Subheader {
+    ListItem.Subheader {
         text: "Desktop"
         textColor: Theme.accentColor
     }
@@ -65,7 +65,7 @@ ModuleView {
         }
     }
 
-    Subheader {
+    ListItem.Subheader {
         text: "Lockscreen"
         textColor: Theme.accentColor
     }
@@ -77,7 +77,7 @@ ModuleView {
         interactive: false
     }
 
-    Subheader {
+    ListItem.Subheader {
         text: "Screen saver"
         textColor: Theme.accentColor
     }

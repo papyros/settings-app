@@ -25,7 +25,7 @@ import QtAccountsService 1.0
 
 ModuleView {
 
-    Subheader {
+    ListItem.Subheader {
         text: "Terminal"
         textColor: Theme.accentColor
     }

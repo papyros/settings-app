@@ -25,7 +25,7 @@ import QtAccountsService 1.0
 
 ModuleView {
 
-    Subheader {
+    ListItem.Subheader {
         text: "Your Account"
         textColor: Theme.accentColor
     }
@@ -37,7 +37,7 @@ ModuleView {
         isAdminUser: currentUser.accountType == UserAccount.AdministratorAccountType
     }
 
-    Subheader {
+    ListItem.Subheader {
         text: "Other Accounts"
         textColor: Theme.accentColor
 

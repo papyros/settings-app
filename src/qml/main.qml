@@ -19,7 +19,7 @@ import QtQuick 2.4
 import Material 0.2
 import Material.ListItems 0.1 as ListItem
 import io.papyros.settings 0.1
-import Papyros.Core 0.1
+import Papyros.Core 0.2
 
 ApplicationWindow {
     title: "Settings"
@@ -51,7 +51,7 @@ ApplicationWindow {
                     right: parent.right
                 }
 
-                Subheader {
+                ListItem.Subheader {
                     text: "Personal"
                     textColor: Theme.accentColor
                 }
@@ -71,7 +71,7 @@ ApplicationWindow {
                     }
                 }
 
-                Subheader {
+                ListItem.Subheader {
                     text: "Hardware"
                     textColor: Theme.accentColor
                 }
@@ -91,7 +91,7 @@ ApplicationWindow {
                     }
                 }
 
-                Subheader {
+                ListItem.Subheader {
                     text: "System"
                     textColor: Theme.accentColor
                 }

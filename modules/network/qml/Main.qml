@@ -88,7 +88,7 @@ ModuleView {
         }
     }
 
-    Subheader {
+    ListItem.Subheader {
         text: "Available Networks"
         textColor: Theme.accentColor
         showDivider: true
