@@ -19,11 +19,32 @@
    Validate with `appstream-util validate *.appdata.xml`
   -->
   <releases>
-    <!-- TODO: Add a release here -->
-  </releases>
+    <release version="0.1" timestamp="1453168063">
+      <description>
+        First release of the app. Features include:
+
+        <ul>
+          <li>Basic app structure (sidebar with module names and a module details view)</li>
+          <li>Initial settings modules:
+            <ul>
+              <li>About</li>
+              <li>Appearance</li>
+              <li>Developer</li>
+              <li>Display</li>
+              <li>Network</li>
+              <li>Sound</li>
+              <li>User</li>
+            </ul>
+          </li>
+          <li>Remember which module was selected last when opening the app</li>
+        </ul>
+      </description>
+  ​  </release>
+  ​</releases>
   <kudos>
     <!-- TODO: Figure out kudos for Papyros -->
   </kudos>
   <url type="homepage">http://papyros.io</url>
   <update_contact>sonrisesoftware@gmail.com</update_contact>
+ <project_group>Papyros</project_group>
 </component>

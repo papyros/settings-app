@@ -1,6 +1,6 @@
 /*
  * System Settings - Settings app for Papyros
- * Copyright (C) 2015 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2015-2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
