@@ -5,7 +5,7 @@ target_link_libraries(papyros-settings
                       Qt5::Core
                       Qt5::Qml
                       Qt5::Quick
-                      Papyros::Papyros)
+                      Papyros::Core)
 
 install(TARGETS papyros-settings
         DESTINATION ${CMAKE_INSTALL_BINDIR})
